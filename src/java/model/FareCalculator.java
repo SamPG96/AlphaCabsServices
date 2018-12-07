@@ -19,7 +19,7 @@ public class FareCalculator {
     * Calculate the cost for a distance
     */
     public static double calculate(double distance, JdbcReadOnly jdbc){
-        int shortDistance;
+        double shortDistance;
         double shortDistPrice;
         double pricePerMile;
         double charge;
@@ -56,23 +56,23 @@ public class FareCalculator {
     /*
     * Retrieve price per mile
     */
-    private static int getPricePerMile(JdbcReadOnly jdbc){
+    private static double getPricePerMile(JdbcReadOnly jdbc){
         ArrayList<HashMap<String,String>> results;
         
         results = jdbc.retrieve(CONFIG_TABLE, "CONFIGNAME", "PricePerMile");
         
-        return Integer.valueOf(results.get(0).get("CONFIGVALUE"));
+        return Double.valueOf(results.get(0).get("CONFIGVALUE"));
     }    
     
     /*
     * Retrieve what is classed a 'short' distance from the DB
     */
-    private static int getShortDistance(JdbcReadOnly jdbc){
+    private static double getShortDistance(JdbcReadOnly jdbc){
         ArrayList<HashMap<String,String>> results;
         
         results = jdbc.retrieve(CONFIG_TABLE, "CONFIGNAME", "ShortDistance");
         
-        return Integer.valueOf(results.get(0).get("CONFIGVALUE"));
+        return Double.valueOf(results.get(0).get("CONFIGVALUE"));
     }
 
     /*
